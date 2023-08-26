@@ -17,9 +17,25 @@ Commit messages start with the following identifiers enclosed in brackets:
 
 * main
 * config/* - overall project configuration
-* feature/docker - setting up the Docker Oracle database
+* feature/docker-oracle - setting up the Docker Oracle database
 * feature/liquibase - configuration of the Liquibase structures
 * feature/intest - configuration of the separate module for Integration Tests
+
+
+## Prerequisites
+
+- Docker
+- JDK 17, make sure that the JAVA_HOME environment variable is properly configured
+
+
+## Run the app
+### 1. Docker
+From the project directory run the following command:
+```shell
+docker-compose up -d oracle
+```
+⏳ The Docker image is downloaded during first build thus it  may take a little longer than usual
+
 
 ## Sources
 [Przemek Malirz's ***VShop*** application on GitHub](https://github.com/pmalirz/vshop)
