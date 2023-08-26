@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - changeSet:
+      id: 000-liquint-init-ddl
+      author: Tom Zoladz
+      context: ddl
+      changes:
+        - sqlFile:
+            path: changes/000-liquint-init-ddl.sql
+      rollback:
+        - sqlFile:
+            path: changes/000-liquint-init-ddl-rollback.sql
