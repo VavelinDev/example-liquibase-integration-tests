@@ -1,0 +1,3 @@
+spring:
+  application:
+    name: Example Liquibase Integration Tests
