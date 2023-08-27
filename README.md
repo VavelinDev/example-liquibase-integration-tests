@@ -17,10 +17,24 @@ Commit messages start with the following identifiers enclosed in brackets:
 
 * main
 * config/* - overall project configuration
-* feature/docker - setting up the Docker Oracle database
+* feature/docker-oracle - setting up the Docker Oracle database
 * feature/liquibase - configuration of the Liquibase structures
 * feature/intest - configuration of the separate module for Integration Tests
 
+
+## Prerequisites
+
+- Docker
+- JDK 17, make sure that the JAVA_HOME environment variable is properly configured
+
+
+## Run the app
+### 1. Docker
+From the project directory run the following command:
+```shell
+docker-compose up -d oracle
+```
+⏳ The Docker image is downloaded during first build thus it  may take a little longer than usual
 
 ### 2. Database initialization
 When running the app for the first time, prepare the database to work with.
@@ -34,11 +48,11 @@ Run the following command to update changes in your database structures:
 SQL files for step '0' in 'database/src/main/resources/changes' intentionally left blank.
 On this basis add next revisions of the database with db operations defined in the sql files in this directory.
 Each revision should be noted in the 'database/src/main/resources/changelog.yml' file.
-
 💡
 <small>Running the ```./gradlew updateSQL``` command before the above you can generate SQL scripts reflecting 
 the changes you've made to your database, without actually applying those changes to the database. It allows you
 to check if the configuration of Liquibase is done correctly.</small>
+
 
 ## Sources
 [Przemek Malirz's ***VShop*** application on GitHub](https://github.com/pmalirz/vshop)
