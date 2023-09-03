@@ -6,3 +6,6 @@ spring:
     driver-class-name: oracle.jdbc.OracleDriver
     username: demouser
     password: demopass
+  jpa:
+    hibernate:
+      ddl-auto: none

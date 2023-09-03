@@ -1,0 +1,2 @@
+INSERT INTO department (id, name, manager_id, location) VALUES (1, 'HR Department', NULL, 'New York');
+INSERT INTO department (id, name, manager_id, location) VALUES (2, 'IT Department', 3, 'San Francisco');

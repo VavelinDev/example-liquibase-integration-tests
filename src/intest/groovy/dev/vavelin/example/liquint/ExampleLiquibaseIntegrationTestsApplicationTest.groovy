@@ -1,14 +1,10 @@
 package dev.vavelin.example.liquint
 
+import dev.vavelin.example.liquint.intestspec.IntestSpecification
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.context.ApplicationContext
-import org.springframework.test.context.ActiveProfiles
-import spock.lang.Specification
 
-@SpringBootTest
-@ActiveProfiles("INTEST")
-class ExampleLiquibaseIntegrationTestsApplicationTest extends Specification {
+class ExampleLiquibaseIntegrationTestsApplicationTest extends IntestSpecification {
 
     @Autowired
     private ApplicationContext applicationContext
