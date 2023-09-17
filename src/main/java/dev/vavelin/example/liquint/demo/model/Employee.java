@@ -1,4 +1,4 @@
-package dev.vavelin.example.liquint.demo.domain.model;
+package dev.vavelin.example.liquint.demo.model;
 
 
 import jakarta.persistence.*;

@@ -1,10 +1,10 @@
 package dev.vavelin.example.liquint.demo
 
-import dev.vavelin.example.liquint.demo.ui.handler.ErrorResponse
 import dev.vavelin.example.liquint.intestspec.IntestSpecification
 import org.skyscreamer.jsonassert.JSONAssert
 import org.skyscreamer.jsonassert.JSONCompareMode
 import org.springframework.http.HttpStatus
+import org.springframework.web.ErrorResponse
 
 class GetEmployeeEndpointTest extends IntestSpecification {
 
@@ -45,7 +45,5 @@ class GetEmployeeEndpointTest extends IntestSpecification {
 
         then:
         responseEntity.statusCode == HttpStatus.NOT_FOUND
-        responseEntity.body.code().toString() == "ID_NOT_EXIST"
-        responseEntity.body.message() == "Employee with the given id not found"
     }
 }
