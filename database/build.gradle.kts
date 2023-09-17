@@ -21,14 +21,14 @@ dependencies {
 }
 
 val dbUrl = project.rootProject.extra["dbUrl"]
-val dbUser = project.rootProject.extra["dbUser"]
+val dbAppUser = project.rootProject.extra["dbAppUser"]
 val dbAdmUser = project.rootProject.extra["dbAdmUser"]
 val dbAdmPass = project.rootProject.extra["dbAdmPass"]
 
 
 tasks.processResources {
     filesMatching("**/changes/*.sql") {
-        filter<ReplaceTokens>("tokens" to mapOf("database_user" to dbUser))
+        filter<ReplaceTokens>("tokens" to mapOf("dbAppUser" to dbAppUser))
     }
 }
 
@@ -44,8 +44,8 @@ liquibase {
                 "url" to dbUrl,
                 "username" to dbAdmUser,
                 "password" to dbAdmPass,
-                "liquibaseSchemaName" to dbUser,
-                "defaultSchemaName" to dbUser,
+                "liquibaseSchemaName" to dbAppUser,
+                "defaultSchemaName" to dbAppUser,
                 "databaseChangelogTableName" to "DEMO_CHANGE_LOG",
                 "databaseChangelogLockTableName" to "DEMO_CHANGE_LOCK"
         )

@@ -4,4 +4,3 @@ CREATE TABLE department (
                             manager_id INT,
                             location VARCHAR(255)
 );
-GRANT SELECT, DELETE, INSERT, UPDATE ON department TO @database_user@;

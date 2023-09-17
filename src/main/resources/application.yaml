@@ -4,8 +4,7 @@ spring:
   datasource:
     url: jdbc:oracle:thin:@//localhost:1521/XEPDB1
     driver-class-name: oracle.jdbc.OracleDriver
-    username: demouser
-    password: demopass
+    username: appuser
   jpa:
     hibernate:
       ddl-auto: none

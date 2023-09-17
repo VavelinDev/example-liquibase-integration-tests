@@ -16,14 +16,14 @@ version = "0.0.1-SNAPSHOT"
 val dbRegion = project.findProperty("db.dbRegion.active") ?: ""
 val dbData = mutableMapOf(
         "dbUrl" to (project.findProperty("db.$dbRegion.dbUrl") ?: "jdbc:oracle:thin:@//localhost:1521/XEPDB1"),
-        "dbUser" to (project.findProperty("db.$dbRegion.dbUser") ?: "demouser"),
-        "dbPass" to (project.findProperty("db.$dbRegion.dbPass") ?: "demopass"),
+        "dbAppUser" to (project.findProperty("db.$dbRegion.dbAppUser") ?: "appuser"),
+        "dbAppPass" to (project.findProperty("db.$dbRegion.dbAppPass") ?: "demopass"),
         "dbAdmUser" to (project.findProperty("db.$dbRegion.dbAdmUser") ?: "adminuser"),
         "dbAdmPass" to (project.findProperty("db.$dbRegion.dbAdmPass") ?: "adminpass"),
         "dbGenRandomUserSuffix" to (project.findProperty("db.$dbRegion.dbGenRandomUserSuffix")?.toString()?.toBoolean() ?: false)
 )
 if (dbData["dbGenRandomUserSuffix"] as Boolean) {
-    dbData["dbUser"] = "${dbData["dbUser"]}${generateRandomSuffix()}"
+    dbData["dbAppUser"] = "${dbData["dbAppUser"]}${generateRandomSuffix()}"
 }
 dbData.keys.forEach{
     extra[it] = dbData[it]
@@ -91,9 +91,9 @@ val intest by tasks.creating(Test::class) {
 
     jvmArgs = listOf(
             "-Dspring.datasource.url=${dbData["dbUrl"]}",
-            "-Dspring.datasource.username=${dbData["dbUser"]}",
-            "-Dspring.datasource.password=${dbData["dbPass"]}",
-            "-Dspring.jpa.properties.hibernate.default_schema=${dbData["dbUser"]}"
+            "-Dspring.datasource.username=${dbData["dbAppUser"]}",
+            "-Dspring.datasource.password=${dbData["dbAppPass"]}",
+            "-Dspring.jpa.properties.hibernate.default_schema=${dbData["dbAppUser"]}"
     )
 }
 
@@ -106,7 +106,8 @@ tasks.register("initDB") {
         logger.lifecycle("Initializing database structures")
         runScript(
                 "${project.projectDir}/src/intest/resources/db/setup-sql/init-db.sql",
-                "@database_user@" to (dbData["dbUser"] as String)
+                "@dbAppUser@" to (dbData["dbAppUser"] as String),
+                "@dbAppPass@" to (dbData["dbAppPass"] as String)
                 )
     }
 
@@ -121,7 +122,7 @@ tasks.register("dropDB") {
         logger.lifecycle("Dropping database structures")
         runScript(
                 "${project.projectDir}/src/intest/resources/db/setup-sql/drop-db.sql",
-                "@database_user@" to (dbData["dbUser"] as String)
+                "@dbAppUser@" to (dbData["dbAppUser"] as String)
         )
     }
 }
@@ -130,7 +131,7 @@ tasks.withType<Test> {
     useJUnitPlatform()
 }
 
-fun runScript(scriptPath: String, replacementPair: Pair<String, String>) {
+fun runScript(scriptPath: String, vararg replacementPairs: Pair<String, String>) {
     val sqlExec = SQLExec()
     sqlExec.project = Project()
     sqlExec.project.init()
@@ -149,7 +150,9 @@ fun runScript(scriptPath: String, replacementPair: Pair<String, String>) {
 
     val scriptFile = file(scriptPath)
     var script = scriptFile.readText()
-    script = script.replace(replacementPair.first, replacementPair.second)
+    replacementPairs.forEach {
+        script = script.replace(it.first, it.second)
+    }
     sqlExec.addText(script)
     sqlExec.execute()
 }

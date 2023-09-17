@@ -1,2 +1,2 @@
-DROP USER @database_user@ CASCADE
+DROP USER @dbAppUser@ CASCADE
 /

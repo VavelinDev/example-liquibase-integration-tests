@@ -6,4 +6,3 @@ CREATE TABLE employee (
                            hire_date DATE NOT NULL,
                            salary NUMBER(10, 2) NOT NULL
 );
-GRANT SELECT, DELETE, INSERT, UPDATE ON employee TO @database_user@;
