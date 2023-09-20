@@ -1,11 +1,21 @@
 databaseChangeLog:
   - changeSet:
-      id: 000-liquint-init-ddl
+      id: 001-liquint-employee-ddl
       author: Tom Zoladz
       context: ddl
       changes:
         - sqlFile:
-            path: changes/000-liquint-init-ddl.sql
+            path: changes/001-liquint-employee-ddl.sql
       rollback:
         - sqlFile:
-            path: changes/000-liquint-init-ddl-rollback.sql
+            path: changes/001-liquint-employee-ddl-rollback.sql
+  - changeSet:
+      id: 002-liquint-department-ddl
+      author: Tom Zoladz
+      context: ddl
+      changes:
+        - sqlFile:
+            path: changes/002-liquint-department-ddl.sql
+      rollback:
+        - sqlFile:
+            path: changes/002-liquint-department-ddl-rollback.sql

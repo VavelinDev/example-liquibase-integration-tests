@@ -1,0 +1,25 @@
+alter session set container = xepdb1
+/
+CREATE USER @dbAppUser@ IDENTIFIED BY @dbAppPass@
+    DEFAULT TABLESPACE users
+    QUOTA 100M ON users
+/
+
+GRANT CREATE SESSION TO @dbAppUser@
+/
+GRANT CREATE TABLE TO @dbAppUser@
+/
+GRANT DELETE ANY TABLE TO @dbAppUser@
+/
+GRANT UPDATE ANY TABLE TO @dbAppUser@
+/
+GRANT INSERT ANY TABLE TO @dbAppUser@
+/
+GRANT SELECT ANY TABLE TO @dbAppUser@
+/
+GRANT CREATE SEQUENCE TO @dbAppUser@
+/
+GRANT CREATE ANY INDEX TO @dbAppUser@
+/
+GRANT SELECT ANY DICTIONARY TO @dbAppUser@
+/

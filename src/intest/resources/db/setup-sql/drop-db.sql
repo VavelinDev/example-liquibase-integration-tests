@@ -1,0 +1,2 @@
+DROP USER @dbAppUser@ CASCADE
+/

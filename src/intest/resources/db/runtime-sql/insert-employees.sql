@@ -1,0 +1,4 @@
+INSERT INTO employee (id, first_name, last_name, job_title, hire_date, salary) VALUES (1, 'John', 'Doe', 'Manager', TO_DATE('2023-09-01', 'YYYY-MM-DD'), 60000.00);
+INSERT INTO employee (id, first_name, last_name, job_title, hire_date, salary) VALUES (2, 'Alice', 'Smith', 'Developer', TO_DATE('2023-09-15', 'YYYY-MM-DD'), 55000.00);
+INSERT INTO employee (id, first_name, last_name, job_title, hire_date, salary) VALUES (3, 'Bob', 'Johnson', 'Analyst', TO_DATE('2023-08-20', 'YYYY-MM-DD'), 50000.00);
+INSERT INTO employee (id, first_name, last_name, hire_date, salary) VALUES (4, 'Eva', 'Williams', TO_DATE('2023-09-10', 'YYYY-MM-DD'), 52000.00);

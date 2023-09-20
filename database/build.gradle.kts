@@ -1,3 +1,5 @@
+import org.apache.tools.ant.filters.ReplaceTokens
+
 plugins {
     id("java")
     id("org.liquibase.gradle") version "2.2.0"
@@ -18,16 +20,32 @@ dependencies {
     liquibaseRuntime("info.picocli:picocli:4.7.4")
 }
 
+val dbUrl = project.rootProject.extra["dbUrl"]
+val dbAppUser = project.rootProject.extra["dbAppUser"]
+val dbAdmUser = project.rootProject.extra["dbAdmUser"]
+val dbAdmPass = project.rootProject.extra["dbAdmPass"]
+
+
+tasks.processResources {
+    filesMatching("**/changes/*.sql") {
+        filter<ReplaceTokens>("tokens" to mapOf("dbAppUser" to dbAppUser))
+    }
+}
+
+tasks.withType<org.liquibase.gradle.LiquibaseTask> {
+    dependsOn(tasks.processResources)
+}
+
 liquibase {
     activities.register("defaultRunList") {
         this.arguments = mapOf(
                 "classpath" to "${buildDir}/resources/main",
                 "changelogFile" to "changelog.yml",
-                "url" to "jdbc:oracle:thin:@//localhost:1521/XEPDB1",
-                "username" to "DEMOUSER",
-                "password" to "demopass",
-                "liquibaseSchemaName" to "DEMOUSER",
-                "defaultSchemaName" to "DEMOUSER",
+                "url" to dbUrl,
+                "username" to dbAdmUser,
+                "password" to dbAdmPass,
+                "liquibaseSchemaName" to dbAppUser,
+                "defaultSchemaName" to dbAppUser,
                 "databaseChangelogTableName" to "DEMO_CHANGE_LOG",
                 "databaseChangelogLockTableName" to "DEMO_CHANGE_LOCK"
         )

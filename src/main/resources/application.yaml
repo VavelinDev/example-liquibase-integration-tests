@@ -1,3 +1,10 @@
 spring:
   application:
     name: Example Liquibase Integration Tests
+  datasource:
+    url: jdbc:oracle:thin:@//localhost:1521/XEPDB1
+    driver-class-name: oracle.jdbc.OracleDriver
+    username: appuser
+  jpa:
+    hibernate:
+      ddl-auto: none
