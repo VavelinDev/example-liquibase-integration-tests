@@ -13,11 +13,11 @@ plugins {
 group = "dev.vavelin.example"
 version = "0.0.1-SNAPSHOT"
 
-val dbRegion = project.findProperty("db.dbRegion.active") ?: ""
+val dbRegion = project.findProperty("db.dbRegion.active") ?: "local"
 val dbData = mutableMapOf(
         "dbUrl" to (project.findProperty("db.$dbRegion.dbUrl") ?: "jdbc:oracle:thin:@//localhost:1521/XEPDB1"),
         "dbAppUser" to (project.findProperty("db.$dbRegion.dbAppUser") ?: "appuser"),
-        "dbAppPass" to (project.findProperty("db.$dbRegion.dbAppPass") ?: "demopass"),
+        "dbAppPass" to (project.findProperty("db.$dbRegion.dbAppPass") ?: "apppass"),
         "dbAdmUser" to (project.findProperty("db.$dbRegion.dbAdmUser") ?: "adminuser"),
         "dbAdmPass" to (project.findProperty("db.$dbRegion.dbAdmPass") ?: "adminpass"),
         "dbGenRandomUserSuffix" to (project.findProperty("db.$dbRegion.dbGenRandomUserSuffix")?.toString()?.toBoolean() ?: false)

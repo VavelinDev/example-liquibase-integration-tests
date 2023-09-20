@@ -35,3 +35,6 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### Docker compose runtime artifacts (e.g. Oracle storage or Infinispan logs and storage)
+/docker/oracle/storage
