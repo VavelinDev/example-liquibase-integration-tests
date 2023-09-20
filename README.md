@@ -1,5 +1,9 @@
 # Integration Tests with **Liquibase, Oracle** and **Spring Boot**
 
+---
+
+![example-intest-liquibase.png](./docs/img/example-intest-liquibase.png)
+
 This demo project showcases the execution of integration tests using Liquibase, even in the absence of Testcontainers or
 Docker. The primary objectives of the project are twofold:
 
